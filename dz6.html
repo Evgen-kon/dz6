@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вещи</title>
+</head>
+<style>
+  .redbord{
+    border:2px solid red;
+  }
+  .bluebord{
+    border:1px solid #00aeff;
+  }
+</style>
+<body>
+  <H1>Fetured Items</H1>
+  <p>Shop for items based on what we featured in this week</p>
+  <div class = "content"></div>
+  <script src="data.js" ></script>
+  <script src="data1.js" ></script>
+  <script>
+  const Contentshop = JSON.parse(Featured_Items);
+  const textItem = JSON.parse(Content_Item);
+  const ItemMass = document.querySelector(".content");
+  Contentshop.forEach(function (elem,index) {
+    const divitem = document.createElement('div');
+    divitem.id = index;
+    ItemMass.appendChild(divitem);
+    const imgItem = document.createElement('img');
+    imgItem.setAttribute("src",elem.imgurl);
+    divitem.appendChild(imgItem);
+    const Parag = document.createElement("h3");
+    Parag.textContent = textItem.parag;
+    divitem.appendChild(Parag);
+    const ptext = document.createElement("p");
+    ptext.textContent = textItem.content;
+    divitem.appendChild(ptext);
+    const price = document.createElement("p");
+    price.textContent ="$" + textItem.price;
+    divitem.appendChild(price);
+
+  });
+  ItemMass.addEventListener("click",function(){
+    event.target.classList.add("redbord");},{once:true});
+  ItemMass.addEventListener("click",function(){
+  const active = ItemMass.querySelector(".redbord");
+  active.classList.remove("redbord");
+  event.target.classList.add("redbord");
+  });
+  ItemMass.addEventListener('mouseover',function(){
+    event.target.classList.add("bluebord");
+    event.target.addEventListener("click",function(e){
+      e.target.classList.remove("bluebord");
+    });});
+    
+  ItemMass.addEventListener("mouseout",function(){
+    event.target.classList.remove("bluebord");
+  });
+  </script>
+</body>
+</html>
